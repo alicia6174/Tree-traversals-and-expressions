@@ -21,6 +21,10 @@ public:
     void Inorder(TreeNode<T> *root);
     void Postorder(TreeNode<T> *root);
     void freeTree(TreeNode<T> *root);
+    bool isOperand(string str);
+    int EvalTreePost(TreeNode<T> *node);
+    void showHumanRep(TreeNode<T> *node);
+    TreeNode<T>* PostorderToParseTree(string str);
 };
 
 template <class T>
@@ -78,12 +82,16 @@ void TreeNode<T>::freeTree(TreeNode<T> *root)
     free(root);
 }
 
-bool isOperand(string str)
+template <class T>
+bool TreeNode<T>::isOperand(string str)
 {
-    return (str[0] >= '0' && str[0] <= '9')? true: false;
+    bool r = (str[0] >= '0' && str[0] <= '9')? true: false;
+
+    return r;
 }
 
-int EvalTreePost(TreeNode<string> * node)
+template <class T>
+int TreeNode<T>::EvalTreePost(TreeNode<T> * node)
 {
     if (!node)
     {
@@ -95,11 +103,11 @@ int EvalTreePost(TreeNode<string> * node)
     int a1, a2;
 
     if (node->left)
-        a1 = EvalTreePost(node->left);
+        a1 = node->EvalTreePost(node->left);
     if (node->right)
-        a2 = EvalTreePost(node->right);
+        a2 = node->EvalTreePost(node->right);
 
-    if (isOperand(node->val))
+    if (node->isOperand(node->val))
     {
         return atoi(node->val.c_str());
     }
@@ -112,13 +120,14 @@ int EvalTreePost(TreeNode<string> * node)
            999;
 }
 
-void showHumanRep(TreeNode<string> * node)
+template <class T>
+void TreeNode<T>::showHumanRep(TreeNode<T> * node)
 {
 
     if (node->left)
     {
         printf("(");
-        showHumanRep(node->left);
+        node->showHumanRep(node->left);
     }
 
     printf("%s", node->val.c_str());
@@ -126,12 +135,13 @@ void showHumanRep(TreeNode<string> * node)
 
     if (node->right)
     {
-        showHumanRep(node->right);
+        node->showHumanRep(node->right);
         printf(")");
     }
 }
 
-TreeNode<string>* PostorderToParseTree(string str)
+template <class T>
+TreeNode<T>* TreeNode<T>::PostorderToParseTree(string str)
 {
     deque< TreeNode<string>* > q;
     for (int i = 0; i < str.size(); ++i)
@@ -145,12 +155,12 @@ TreeNode<string>* PostorderToParseTree(string str)
     stack< TreeNode<string>* > st;
     while (!q.empty())
     {
-        TreeNode<string>  * nd = q.front();
+        TreeNode<string>* nd = q.front();
         q.pop_front();
 
         string buf = nd->val;
 
-        if (isOperand(buf))
+        if (nd->isOperand(buf))
         {
             st.push(nd);
         }
@@ -182,12 +192,12 @@ int main(int argc, const char *argv[])
     {
         string str = "12+3*";
         TreeNode<string>* root = new TreeNode<string>();
-        root = PostorderToParseTree(str);
+        root = root->PostorderToParseTree(str);
         root->Postorder(root);
 
         cout << endl;
-        cout << "eval = " << EvalTreePost(root) << endl;
-        showHumanRep(root);
+        cout << "eval = " << root->EvalTreePost(root) << endl;
+        root->showHumanRep(root);
         cout << endl;
     }
     return 0;
@@ -214,8 +224,6 @@ int main(int argc, const char *argv[])
     Nodes[0]->Inorder(Nodes[0]);
     cout << "\n";
     Nodes[0]->Postorder(Nodes[0]);
-
-
 
     return 0;
 }
