@@ -78,6 +78,11 @@ void TreeNode<T>::freeTree(TreeNode<T> *root)
     free(root);
 }
 
+bool isOperand(char c)
+{
+    return (c >= '0' && c <= '9')? true: false;
+}
+
 int main(int argc, const char *argv[])
 {
     {
@@ -88,13 +93,39 @@ int main(int argc, const char *argv[])
             TreeNode<char> *tmp = new TreeNode<char>(str[i]);
             q.push_back(tmp);
         }
+
         stack< TreeNode<char>* > st;
         while (!q.empty())
         {
             TreeNode<char>  * nd = q.front();
             q.pop_front();
 
+            char c = nd->val;
+
+            if (isOperand(c))
+            {
+                st.push(nd);
+            }
+            else
+            {
+                TreeNode<char> * n2 = st.top();
+                st.pop();
+
+                TreeNode<char> * n1 = st.top();
+                st.pop();
+
+                TreeNode<char> * nnd =
+                    new TreeNode<char>(c);
+
+                nnd->left = n1;
+                nnd->right = n2;
+                st.push(nnd);
+            }
+
         }
+
+        TreeNode<char> * root = st.top();
+        root->Postorder(root);
 
         cout << endl;
     }
