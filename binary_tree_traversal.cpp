@@ -7,6 +7,9 @@
 
 using namespace std;
 
+//TO DO: preorder/inorder to postorder, translations,
+//postorder()...
+
 template <class T>
 class TreeNode
 {
@@ -17,14 +20,14 @@ public:
     T val;
     TreeNode<T> *left;
     TreeNode<T> *right;
-    void Preorder(TreeNode<T> *root);
-    void Inorder(TreeNode<T> *root);
-    void Postorder(TreeNode<T> *root);
+    void preorder(TreeNode<T> *root);
+    void inorder(TreeNode<T> *root);
+    void postorder(TreeNode<T> *root);
     void freeTree(TreeNode<T> *root);
     bool isOperand(string str);
-    int EvalTreePost(TreeNode<T> *node);
+    int evalTreePost(TreeNode<T> *node);
     void showHumanRep(TreeNode<T> *node);
-    TreeNode<T>* PostorderToParseTree(string str);
+    TreeNode<T>* postorderToParseTree(string str);
 };
 
 template <class T>
@@ -46,29 +49,29 @@ TreeNode<T>::TreeNode(T v):
 }
 
 template <class T>
-void TreeNode<T>::Preorder(TreeNode<T> *root)
+void TreeNode<T>::preorder(TreeNode<T> *root)
 {
     if (!root) return;
     cout << "[" << root->val << "]";
-    root->Preorder(root->left);
-    root->Preorder(root->right);
+    root->preorder(root->left);
+    root->preorder(root->right);
 }
 
 template <class T>
-void TreeNode<T>::Inorder(TreeNode<T> *root)
+void TreeNode<T>::inorder(TreeNode<T> *root)
 {
     if (!root) return;
-    root->Inorder(root->left);
+    root->inorder(root->left);
     cout << "[" << root->val << "]";
-    root->Inorder(root->right);
+    root->inorder(root->right);
 }
 
 template <class T>
-void TreeNode<T>::Postorder(TreeNode<T> *root)
+void TreeNode<T>::postorder(TreeNode<T> *root)
 {
     if (!root) return;
-    root->Postorder(root->left);
-    root->Postorder(root->right);
+    root->postorder(root->left);
+    root->postorder(root->right);
     cout << "[" << root->val << "]";
 }
 
@@ -91,7 +94,7 @@ bool TreeNode<T>::isOperand(string str)
 }
 
 template <class T>
-int TreeNode<T>::EvalTreePost(TreeNode<T> * node)
+int TreeNode<T>::evalTreePost(TreeNode<T> * node)
 {
     if (!node)
     {
@@ -103,9 +106,9 @@ int TreeNode<T>::EvalTreePost(TreeNode<T> * node)
     int a1, a2;
 
     if (node->left)
-        a1 = node->EvalTreePost(node->left);
+        a1 = node->evalTreePost(node->left);
     if (node->right)
-        a2 = node->EvalTreePost(node->right);
+        a2 = node->evalTreePost(node->right);
 
     if (node->isOperand(node->val))
     {
@@ -141,7 +144,7 @@ void TreeNode<T>::showHumanRep(TreeNode<T> * node)
 }
 
 template <class T>
-TreeNode<T>* TreeNode<T>::PostorderToParseTree(string str)
+TreeNode<T>* TreeNode<T>::postorderToParseTree(string str)
 {
     deque< TreeNode<string>* > q;
     for (int i = 0; i < str.size(); ++i)
@@ -192,14 +195,15 @@ int main(int argc, const char *argv[])
     {
         string str = "12+3*";
         TreeNode<string>* root = new TreeNode<string>();
-        root = root->PostorderToParseTree(str);
-        root->Postorder(root);
+        root = root->postorderToParseTree(str);
+        root->postorder(root);
 
         cout << endl;
-        cout << "eval = " << root->EvalTreePost(root) << endl;
+        cout << "eval = " << root->evalTreePost(root) << endl;
         root->showHumanRep(root);
         cout << endl;
     }
+
     return 0;
 
     //---Construct a tree---//
@@ -219,11 +223,12 @@ int main(int argc, const char *argv[])
     Nodes[2]->right = Nodes[6];
 
     //---Tree traversal---//
-    Nodes[0]->Preorder(Nodes[0]);
+    Nodes[0]->preorder(Nodes[0]);
+    printf("str\n");
     cout << "\n";
-    Nodes[0]->Inorder(Nodes[0]);
+    Nodes[0]->inorder(Nodes[0]);
     cout << "\n";
-    Nodes[0]->Postorder(Nodes[0]);
+    Nodes[0]->postorder(Nodes[0]);
 
     return 0;
 }
