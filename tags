@@ -1,0 +1,51 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	Makefile	/^CC       = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS   = -g -Wall$/;"	m
+CXX	Makefile	/^CXX      = g++$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS = $(CFLAGS) -Weffc++$/;"	m
+CXX_OBJS	Makefile	/^CXX_OBJS    = $(patsubst %.cpp,%.o,$(wildcard $(CXX_SOURCES)))$/;"	m
+CXX_SOURCES	Makefile	/^CXX_SOURCES = $(shell find . -name "*.cpp")$/;"	m
+C_OBJS	Makefile	/^C_OBJS      = $(patsubst %.c,%.o,$(wildcard $(C_SOURCES)))$/;"	m
+C_SOURCES	Makefile	/^C_SOURCES   = $(shell find . -name "*.c")$/;"	m
+DIR	Makefile	/^DIR     = $(shell pwd)$/;"	m
+EXEC	Makefile	/^EXEC      = $(shell basename "$(DIR)")$/;"	m
+INCPATH	Makefile	/^INCPATH  =$/;"	m
+Inorder	binary_tree_traversal.cpp	/^    void Inorder(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
+Inorder	binary_tree_traversal.cpp	/^void TreeNode<T>::Inorder(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+LIBS	Makefile	/^LIBS     = -lm$/;"	m
+OBJS	Makefile	/^OBJS        = $(C_OBJS) $(CXX_OBJS)$/;"	m
+Postorder	binary_tree_traversal.cpp	/^    void Postorder(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
+Postorder	binary_tree_traversal.cpp	/^void TreeNode<T>::Postorder(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+Preorder	binary_tree_traversal.cpp	/^    void Preorder(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
+Preorder	binary_tree_traversal.cpp	/^void TreeNode<T>::Preorder(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+TreeNode	binary_tree_traversal.cpp	/^    TreeNode<T>(T v);$/;"	p	class:TreeNode	file:	access:public	signature:(T v)
+TreeNode	binary_tree_traversal.cpp	/^    TreeNode<T>(void);$/;"	p	class:TreeNode	file:	access:public	signature:(void)
+TreeNode	binary_tree_traversal.cpp	/^TreeNode<T>::TreeNode(T  v):$/;"	f	class:TreeNode	signature:(T v)
+TreeNode	binary_tree_traversal.cpp	/^TreeNode<T>::TreeNode(void):$/;"	f	class:TreeNode	signature:(void)
+TreeNode	binary_tree_traversal.cpp	/^class TreeNode$/;"	c	file:
+TreeNode::Inorder	binary_tree_traversal.cpp	/^    void Inorder(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
+TreeNode::Inorder	binary_tree_traversal.cpp	/^void TreeNode<T>::Inorder(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+TreeNode::Postorder	binary_tree_traversal.cpp	/^    void Postorder(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
+TreeNode::Postorder	binary_tree_traversal.cpp	/^void TreeNode<T>::Postorder(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+TreeNode::Preorder	binary_tree_traversal.cpp	/^    void Preorder(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
+TreeNode::Preorder	binary_tree_traversal.cpp	/^void TreeNode<T>::Preorder(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+TreeNode::TreeNode	binary_tree_traversal.cpp	/^    TreeNode<T>(T v);$/;"	p	class:TreeNode	file:	access:public	signature:(T v)
+TreeNode::TreeNode	binary_tree_traversal.cpp	/^    TreeNode<T>(void);$/;"	p	class:TreeNode	file:	access:public	signature:(void)
+TreeNode::TreeNode	binary_tree_traversal.cpp	/^TreeNode<T>::TreeNode(T  v):$/;"	f	class:TreeNode	signature:(T v)
+TreeNode::TreeNode	binary_tree_traversal.cpp	/^TreeNode<T>::TreeNode(void):$/;"	f	class:TreeNode	signature:(void)
+TreeNode::freeTree	binary_tree_traversal.cpp	/^    void freeTree(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
+TreeNode::freeTree	binary_tree_traversal.cpp	/^void TreeNode<T>::freeTree(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+TreeNode::left	binary_tree_traversal.cpp	/^    TreeNode<T> *left;$/;"	m	class:TreeNode	file:	access:public
+TreeNode::right	binary_tree_traversal.cpp	/^    TreeNode<T> *right;$/;"	m	class:TreeNode	file:	access:public
+TreeNode::val	binary_tree_traversal.cpp	/^    T val;$/;"	m	class:TreeNode	file:	access:public
+freeTree	binary_tree_traversal.cpp	/^    void freeTree(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
+freeTree	binary_tree_traversal.cpp	/^void TreeNode<T>::freeTree(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+left	binary_tree_traversal.cpp	/^    TreeNode<T> *left;$/;"	m	class:TreeNode	file:	access:public
+main	binary_tree_traversal.cpp	/^int main(int argc, const char *argv[])$/;"	f	signature:(int argc, const char *argv[])
+right	binary_tree_traversal.cpp	/^    TreeNode<T> *right;$/;"	m	class:TreeNode	file:	access:public
+val	binary_tree_traversal.cpp	/^    T val;$/;"	m	class:TreeNode	file:	access:public
