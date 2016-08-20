@@ -4,10 +4,13 @@
 #include <string>
 #include <stack>
 #include <deque>
+#include <vector>
 
 using namespace std;
 
-//TO DO: preorder/inorder to postorder, translations,
+//TO DO: preorder/inorder to postorder (priority),
+//converting,
+//iterative traversals,
 //postorder()...
 
 template <class T>
@@ -189,22 +192,93 @@ TreeNode<T>* TreeNode<T>::postorderToParseTree(string str)
     return root;
 }
 
+enum
+{
+    NONE = 0,
+    OPERAND,
+    OPERATOR,
+    L_PARA,
+    R_PARA
+};
+
+int getType(char ch)
+{
+    return
+        ( ch >= '0' && ch <= '9' )? OPERAND:
+        ( ch == '*' || ch == '/' )? OPERATOR:
+        ( ch == '+' || ch == '-' )? OPERATOR:
+        ( ch == '(' )? L_PARA:
+        ( ch == ')' )? R_PARA:
+        NONE;
+}
+
+int getIcp(char ch)
+{
+    return
+        ( ch == '*' || ch == '/' )? 10:
+        ( ch == '+' || ch == '-' )? 9:
+        ( ch == '(')? 0:
+        -1;
+}
+
+int getIsp(char ch)
+{
+    return
+        ( ch == '*' || ch == '/' )? 10:
+        ( ch == '+' || ch == '-' )? 9:
+        ( ch == '(')? 20:
+        -1;
+}
 
 int main(int argc, const char *argv[])
 {
     {
-        string str = "12+3*";
-        TreeNode<string>* root = new TreeNode<string>();
-        root = root->postorderToParseTree(str);
-        root->postorder(root);
+        const char * str = "(1+2)*3";
+        stack<char> st;
+        vector<char> vec;
+        while(*str)
+        {
+            char ch = *str;
+            int type = getType(ch);
+            switch(type)
+            {
+                case OPERAND:
+                    printf("##2:%c\n",ch);
+                    //printf("%c",ch);
+                    vec.push_back(ch);
+                    break;
+                case OPERATOR:
+                    while ( !(st.empty()) && getIcp(ch) < getIsp(st.top()) )
+                    {
+                        if (st.top() == '(') st.pop();
+                        printf("%c",st.top());
+                        vec.push_back(st.top());
+                        st.pop();
+                    }
+                    printf("##3:%c\n",ch);
+                    st.push(ch);
+                    break;
+                case L_PARA:
+                    printf("##1:%c\n",ch);
+                    st.push(ch);
+                    break;
+                case R_PARA:
+                    while(st.top() != '(')
+                    {
+                        printf("%c",st.top());
+                        vec.push_back(st.top());
+                        st.pop();
+                    }
+                    st.pop();
+                    break;
+                case NONE:
+                    break;
+            };
+            str++;
+        }
 
-        cout << endl;
-        cout << "eval = " << root->evalTreePost(root) << endl;
-        root->showHumanRep(root);
-        cout << endl;
+        return 0;
     }
-
-    return 0;
 
     //---Construct a tree---//
     TreeNode<int> * Nodes[16];
@@ -224,11 +298,23 @@ int main(int argc, const char *argv[])
 
     //---Tree traversal---//
     Nodes[0]->preorder(Nodes[0]);
-    printf("str\n");
+    //printf("str\n");
     cout << "\n";
     Nodes[0]->inorder(Nodes[0]);
     cout << "\n";
     Nodes[0]->postorder(Nodes[0]);
+
+    //---Postorder to parse tree---//
+    string str = "12+3*";
+    TreeNode<string>* root = new TreeNode<string>();
+    root = root->postorderToParseTree(str);
+    root->postorder(root);
+
+    cout << endl;
+    cout << "Eval = " << root->evalTreePost(root) << endl;
+    cout << "Human Repre.: ";
+    root->showHumanRep(root);
+    cout << endl;
 
     return 0;
 }
