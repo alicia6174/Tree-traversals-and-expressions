@@ -217,7 +217,7 @@ int getIcp(char ch)
     return
         ( ch == '*' || ch == '/' )? 10:
         ( ch == '+' || ch == '-' )? 9:
-        ( ch == '(')? 0:
+        ( ch == '(')? 20:
         -1;
 }
 
@@ -226,7 +226,7 @@ int getIsp(char ch)
     return
         ( ch == '*' || ch == '/' )? 10:
         ( ch == '+' || ch == '-' )? 9:
-        ( ch == '(')? 20:
+        ( ch == '(')? 0:
         -1;
 }
 
@@ -243,23 +243,19 @@ int main(int argc, const char *argv[])
             switch(type)
             {
                 case OPERAND:
-                    printf("##2:%c\n",ch);
-                    //printf("%c",ch);
+                    printf("%c",ch);
                     vec.push_back(ch);
                     break;
                 case OPERATOR:
                     while ( !(st.empty()) && getIcp(ch) < getIsp(st.top()) )
                     {
-                        if (st.top() == '(') st.pop();
                         printf("%c",st.top());
                         vec.push_back(st.top());
                         st.pop();
                     }
-                    printf("##3:%c\n",ch);
                     st.push(ch);
                     break;
                 case L_PARA:
-                    printf("##1:%c\n",ch);
                     st.push(ch);
                     break;
                 case R_PARA:
@@ -275,6 +271,24 @@ int main(int argc, const char *argv[])
                     break;
             };
             str++;
+        }
+
+        while (!st.empty())
+        {
+            printf("%c", st.top());
+            st.pop();
+        }
+        printf("\n");
+
+
+        {
+
+            string str_ret;
+            for (int i = 0; i < vec.size(); ++i)
+            {
+                str_ret.push_back(vec[i]);
+            }
+
         }
 
         return 0;
