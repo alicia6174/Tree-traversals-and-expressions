@@ -201,98 +201,118 @@ enum
     R_PARA
 };
 
-int getType(char ch)
+int getType(string ch)
 {
     return
-        ( ch >= '0' && ch <= '9' )? OPERAND:
-        ( ch == '*' || ch == '/' )? OPERATOR:
-        ( ch == '+' || ch == '-' )? OPERATOR:
-        ( ch == '(' )? L_PARA:
-        ( ch == ')' )? R_PARA:
+        ( ch[0] >= '0' && ch[0] <= '9' )? OPERAND:
+        ( ch == "*" || ch == "/" )? OPERATOR:
+        ( ch == "+" || ch == "-" )? OPERATOR:
+        ( ch == "(" )? L_PARA:
+        ( ch == ")" )? R_PARA:
         NONE;
 }
 
-int getIcp(char ch)
+int getIcp(string ch)
 {
     return
-        ( ch == '*' || ch == '/' )? 10:
-        ( ch == '+' || ch == '-' )? 9:
-        ( ch == '(')? 20:
+        ( ch == "*" || ch == "/" )? 10:
+        ( ch == "+" || ch == "-" )? 9:
+        ( ch == "(")? 20:
         -1;
 }
 
-int getIsp(char ch)
+int getIsp(string ch)
 {
     return
-        ( ch == '*' || ch == '/' )? 10:
-        ( ch == '+' || ch == '-' )? 9:
-        ( ch == '(')? 0:
+        ( ch == "*" || ch == "/" )? 10:
+        ( ch == "+" || ch == "-" )? 9:
+        ( ch == "(")? 0:
         -1;
+}
+
+
+//========================================
+
+
+
+
+void run(void)
+{
+    vector<string> str;
+    str.push_back("(");
+    str.push_back("1");
+    str.push_back("+");
+    str.push_back("2");
+    str.push_back(")");
+    str.push_back("*");
+    str.push_back("3");
+
+  //  const char * str = "(1+2)*3";
+    stack<string> st;
+    vector<string> vec;
+
+    //while(*str)
+    for (int r = 0; r < str.size(); ++r)
+    {
+        string ch = str[r];
+        int type = getType(ch);
+        switch(type)
+        {
+            case OPERAND:
+            //    printf("%c",ch);
+                vec.push_back(ch);
+                break;
+            case OPERATOR:
+                while ( !(st.empty()) && getIcp(ch) < getIsp(st.top()) )
+                {
+             //       printf("%c",st.top());
+                    vec.push_back(st.top());
+                    st.pop();
+                }
+                st.push(ch);
+                break;
+            case L_PARA:
+                st.push(ch);
+                break;
+            case R_PARA:
+                while(st.top() != "(")
+                {
+              //      printf("%c",st.top());
+                    vec.push_back(st.top());
+                    st.pop();
+                }
+                st.pop();
+                break;
+            case NONE:
+                break;
+        };
+    }
+
+    while (!st.empty())
+    {
+        vec.push_back(st.top());
+        st.pop();
+        //printf("%c", st.top());
+    }
+    printf("\n");
+
+
+    {
+
+        for (int i = 0; i < vec.size(); ++i)
+        {
+            printf("%s ", vec[i].c_str());
+        }
+
+    }
+
 }
 
 int main(int argc, const char *argv[])
 {
-    {
-        const char * str = "(1+2)*3";
-        stack<char> st;
-        vector<char> vec;
-        while(*str)
-        {
-            char ch = *str;
-            int type = getType(ch);
-            switch(type)
-            {
-                case OPERAND:
-                    printf("%c",ch);
-                    vec.push_back(ch);
-                    break;
-                case OPERATOR:
-                    while ( !(st.empty()) && getIcp(ch) < getIsp(st.top()) )
-                    {
-                        printf("%c",st.top());
-                        vec.push_back(st.top());
-                        st.pop();
-                    }
-                    st.push(ch);
-                    break;
-                case L_PARA:
-                    st.push(ch);
-                    break;
-                case R_PARA:
-                    while(st.top() != '(')
-                    {
-                        printf("%c",st.top());
-                        vec.push_back(st.top());
-                        st.pop();
-                    }
-                    st.pop();
-                    break;
-                case NONE:
-                    break;
-            };
-            str++;
-        }
 
-        while (!st.empty())
-        {
-            printf("%c", st.top());
-            st.pop();
-        }
-        printf("\n");
-
-
-        {
-
-            string str_ret;
-            for (int i = 0; i < vec.size(); ++i)
-            {
-                str_ret.push_back(vec[i]);
-            }
-
-        }
-
-        return 0;
-    }
+    run();
+    return 0;
 
     //---Construct a tree---//
     TreeNode<int> * Nodes[16];

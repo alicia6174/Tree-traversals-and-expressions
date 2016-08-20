@@ -16,7 +16,12 @@ DIR	Makefile	/^DIR     = $(shell pwd)$/;"	m
 EXEC	Makefile	/^EXEC      = $(shell basename "$(DIR)")$/;"	m
 INCPATH	Makefile	/^INCPATH  =$/;"	m
 LIBS	Makefile	/^LIBS     = -lm$/;"	m
+L_PARA	binary_tree_traversal.cpp	/^    L_PARA,$/;"	e	enum:__anon1	file:
+NONE	binary_tree_traversal.cpp	/^    NONE = 0,$/;"	e	enum:__anon1	file:
 OBJS	Makefile	/^OBJS        = $(C_OBJS) $(CXX_OBJS)$/;"	m
+OPERAND	binary_tree_traversal.cpp	/^    OPERAND,$/;"	e	enum:__anon1	file:
+OPERATOR	binary_tree_traversal.cpp	/^    OPERATOR,$/;"	e	enum:__anon1	file:
+R_PARA	binary_tree_traversal.cpp	/^    R_PARA$/;"	e	enum:__anon1	file:
 TreeNode	binary_tree_traversal.cpp	/^    TreeNode<T>(T v);$/;"	p	class:TreeNode	file:	access:public	signature:(T v)
 TreeNode	binary_tree_traversal.cpp	/^    TreeNode<T>(void);$/;"	p	class:TreeNode	file:	access:public	signature:(void)
 TreeNode	binary_tree_traversal.cpp	/^TreeNode<T>::TreeNode(T v):$/;"	f	class:TreeNode	signature:(T v)
@@ -49,6 +54,9 @@ evalTreePost	binary_tree_traversal.cpp	/^    int evalTreePost(TreeNode<T> *node)
 evalTreePost	binary_tree_traversal.cpp	/^int TreeNode<T>::evalTreePost(TreeNode<T> * node)$/;"	f	class:TreeNode	signature:(TreeNode<T> * node)
 freeTree	binary_tree_traversal.cpp	/^    void freeTree(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
 freeTree	binary_tree_traversal.cpp	/^void TreeNode<T>::freeTree(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
+getIcp	binary_tree_traversal.cpp	/^int getIcp(char ch)$/;"	f	signature:(char ch)
+getIsp	binary_tree_traversal.cpp	/^int getIsp(char ch)$/;"	f	signature:(char ch)
+getType	binary_tree_traversal.cpp	/^int getType(char ch)$/;"	f	signature:(char ch)
 inorder	binary_tree_traversal.cpp	/^    void inorder(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
 inorder	binary_tree_traversal.cpp	/^void TreeNode<T>::inorder(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
 isOperand	binary_tree_traversal.cpp	/^    bool isOperand(string str);$/;"	p	class:TreeNode	file:	access:public	signature:(string str)
@@ -62,6 +70,7 @@ postorderToParseTree	binary_tree_traversal.cpp	/^TreeNode<T>* TreeNode<T>::posto
 preorder	binary_tree_traversal.cpp	/^    void preorder(TreeNode<T> *root);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *root)
 preorder	binary_tree_traversal.cpp	/^void TreeNode<T>::preorder(TreeNode<T> *root)$/;"	f	class:TreeNode	signature:(TreeNode<T> *root)
 right	binary_tree_traversal.cpp	/^    TreeNode<T> *right;$/;"	m	class:TreeNode	file:	access:public
+run	binary_tree_traversal.cpp	/^void run(void)$/;"	f	signature:(void)
 showHumanRep	binary_tree_traversal.cpp	/^    void showHumanRep(TreeNode<T> *node);$/;"	p	class:TreeNode	file:	access:public	signature:(TreeNode<T> *node)
 showHumanRep	binary_tree_traversal.cpp	/^void TreeNode<T>::showHumanRep(TreeNode<T> * node)$/;"	f	class:TreeNode	signature:(TreeNode<T> * node)
 val	binary_tree_traversal.cpp	/^    T val;$/;"	m	class:TreeNode	file:	access:public
