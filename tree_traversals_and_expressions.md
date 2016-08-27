@@ -18,16 +18,22 @@
 1. Recursive.
 2. Iterative.
 
-### Arithmetic expression ###
+### Arithmetic expressions ###
 1. Prefix - \*+123
 2. Infix - (1+2)*3
 (for human use, including parentheses)
 3. Postfix - 12+3\*
 
 ### Methods of converting expressions ###
-1. Construct the parse tree.
+1. Set the priority of operators.
+	
+	Take "infix to postfix" for example, set "in-come priority" 
+	and "in-stack priority" for each operator and parathesis. Then 
+	use one Stack to do converting. (see [Code]) 
 
-   Fix one of the traversals, for example, the postorder.
+2. Construct the parse tree.
+
+   Fix one of the expressions, for example, the postfix.
    Use one Queue and one Stack to construct the parse tree.
    
    ```
@@ -46,9 +52,11 @@
    3. The last root remained in the stack will be the one of the parse tree.
    ```
  
- Doing any of the three kinds of traversals, we will get the corresponding expression.
-2. Set the priority of operators.
-(To be continued)
+ Doing any of the three kinds of tree traversals, we will get the 
+ corresponding expression.
+
 
 ### Evaluation ###
 Use all of the expressions to obtain different values.
+
+[[Code]](https://github.com/alicia6174/tree_traversals_and_expressions/blob/master/tree_traversals_and_expressions.cpp)
